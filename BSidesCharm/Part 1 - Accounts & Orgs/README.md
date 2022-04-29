@@ -15,8 +15,10 @@ New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@g
 
 ## Part A: Create and secure a new AWS Account
 
-1. Create new AWS account [on the AWS website](https://aws.amazon.com/console/). ***NOTE: This will be the Organization management account! I do not recommend using any existing AWS accounts for this training.***
-    * Account type should be personal
+1. Create new AWS account
+    ***NOTE: This will be the Organization management account! I do not recommend using any existing AWS accounts for this training.***
+    * [Create a new account on the AWS website](https://aws.amazon.com/console/).
+    * Account type should be personal.
     * You'll need to enter personal and credit card information, but this training will attempt to keep services within the Free Tier.
 
 2. Secure root user with MFA ([AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root))
