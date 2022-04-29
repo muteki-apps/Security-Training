@@ -34,12 +34,12 @@ New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@g
     * Navigate to AWS Organizations and select "create Organization"
     * **Note:** The account you're currently logged into will become the Organization's management account!
 
-5. Create a Member Account
+5. Create a member account
     * In the AWS Accounts view in Organizations, select "Add an AWS Account"
     * Create new account called `member-test-acct`, using your email address with alias such as "YOUR_EMAIL+TEST1@gmail.com". IAM role name can be left as default.
     * This process make take 5+ minutes, so we'll come back to this shortly.
 
-7. Create New Organizational Units
+7. Create new Organizational Units
     * In the AWS Accounts view in Organizations, select the Root OU
     * Under the Actions dropdown, select Organization Unit -> Create New
     * Create 2 new OUs: `region-good`, `region-bad`
@@ -47,20 +47,22 @@ New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@g
 
 ## Part C: Creating Service Control Policies
 
-8. Create two new Service Control Policies in Organizations -> Policies -> Service Control Policies 
+8. Create two Service Control Policies 
+    * Navigate to Organizations -> Policies -> Service Control Policies 
     * In Service Control Policies, create a new policy called `region-good`. Copy and paste the text of [region-good SCP policy here](region-good.json) into the policy statement policy statement box, replacing the placeholder text.
     * Next, create a new policy following the same process, named `region-bad`. Copy and paste the [region-bad SCP policy here](region-bad.json).
 
-9. Returning to AWS Accounts, click on the `region-good` OU. Locate the 'policies' tab, and click 'attach' to select and apply the `region-good` SCP.
+9. Apply SCPs to OUs
+    * Returning to AWS Accounts, click on the `region-good` OU. Locate the 'policies' tab, and click 'attach' to select and apply the `region-good` SCP.
     * Follow the same process for the `region-bad` OU, attaching the `region-bad` policy.
 
-10. Move 2nd Account into OU
+10. Move member account into OU
     * In AWS Accounts view, move `member-test-acct` into the OU `region-bad`
     * Your OU structure should look like this:
 
     ![OU Structure](OU_structure.JPG)
 
-11. Configure 2nd Account
+11. Configure member account
     * New account `member-test-acct` should now have been created.
     * Log into the new account (use a private browsing window for simplicity!) using the aliased email
     * Set the root user password for `member-test-acct` by selecting "forgot my password"
@@ -77,9 +79,11 @@ New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@g
 
     Briefly review the contents of the SCP [region-bad SCP policy here](region-bad.json) to determine why the creation failed.
 
-13. Move Member Account to Another OU
-    * In AWS Accounts, move `member-test-acct` into the `region-good` OU and repeat the bucket creation steps above.
-    * This creation should succeed.
+13. Move member account between OUs
+    * In AWS Accounts, move `member-test-acct` into the `region-good` OU
+    * Repeat the bucket creation steps above.
+    
+    *** This creation should succeed**
 
     Review the contents of the SCP [region-good SCP policy here](region-good.json) to determine why this creation succeeded.
 
