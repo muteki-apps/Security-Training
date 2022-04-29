@@ -5,11 +5,12 @@
 By the end of this activity, you should have familiarity with the following:
 
 * Creating AWS Accounts and securing root user credentials
-* Creating AWS Organizations and structuring with Organizational Units
+* Creating AWS Organizations and using Organizational Units
 * Applying Service Control Policies at the OU level
+* BONUS: Configuring billing preferences and creating Billing Alarms
 
 ### IMPORTANT: I strongly recommend creating enitrely new AWS accounts for this exercise. If using existing accounts, please proceed with caution.
-### New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@gmail.com
+New AWS accounts can be created using email aliasing such as YOUR_NAME[+ALIAS]@gmail.com
 
 
 ## Part A: Create and secure a new AWS Account
@@ -50,23 +51,25 @@ By the end of this activity, you should have familiarity with the following:
     * In Service Control Policies, create a new policy called `region-good`. Copy and paste the text of [region-good SCP policy here](region-good.json) into the policy statement policy statement box, replacing the placeholder text.
     * Next, create a new policy following the same process, named `region-bad`. Copy and paste the [region-bad SCP policy here](region-bad.json).
 
-9. Returning to AWS Accounts, click on the region-good OU. Locate the 'policies' tab, and click 'attach' to select and apply the region-good SCP.
-    * Follow the same process for the region-bad OU, attaching the region-bad policy.
+9. Returning to AWS Accounts, click on the `region-good` OU. Locate the 'policies' tab, and click 'attach' to select and apply the `region-good` SCP.
+    * Follow the same process for the `region-bad` OU, attaching the `region-bad` policy.
 
-10. Configure 2nd Account
-    * New account `member-test-acct` should now have been created.
-    * Log into the new account (use a private browsing window for simplicity!) using the aliased email and select "forgot my password"
-    * NOTE: In the real world, we would want to secure this account with MFA immediately, but in the interests of time we'll leave it as is.
-
-11. Apply SCPs to 2nd Account
+10. Move 2nd Account into OU
     * In AWS Accounts view, move `member-test-acct` into the OU `region-bad`
     * Your OU structure should look like this:
 
     ![OU Structure](OU_structure.JPG)
 
+11. Configure 2nd Account
+    * New account `member-test-acct` should now have been created.
+    * Log into the new account (use a private browsing window for simplicity!) using the aliased email
+    * Set the root user password for `member-test-acct` by selecting "forgot my password"
+    * NOTE: In the real world, we would want to secure this account with MFA immediately, but in the interests of time we'll leave it as is.
+
 12. Test the SCP with S3
     * In `member-test-acct`, navigate to the Amazon S3 service page and select "Create Bucket"
-    * Name the bucket `bsidescharm2022awstrainingbucket1`
+    * Name the bucket `bsidescharm2022awstrainingbucket-[and some randomness of your choosing]`
+    * NOTE: S3 buckets names are unique globally, so two buckets in different accounts cannot have the same name.
     * Select the AWS Region `us-east-1`
     * Leaving everything else as default, hit "Create Bucket"
 
@@ -83,8 +86,12 @@ By the end of this activity, you should have familiarity with the following:
 ### You're done!
 
 
-14. BONUS: [Configure Billing Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
-    * Configure custom alarms for billing thresholds with CloudWatch. Note that Billing Alerts must be enabled beforehand!
+### BONUS: Configure Billing Alarms
+
+[AWS Guide: Configure Billing Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
+
+14. Configure custom alarms for billing thresholds with CloudWatch. 
+    * Note that Billing Alerts must be enabled beforehand!
     * Navigate to the AWS CloudWatch Service -> Alarms -> Billing
     * Select "Create Alarm" and hit "Select Metric"
     * Select "Billing" -> "Total Estimated Charge"
