@@ -1,0 +1,18 @@
+{
+	"Version": "2012-10-17",
+	"Id": "123",
+	"Statement": [
+		{
+			"Sid": "",
+			"Effect": "Deny",
+			"Principal": "*",
+			"Action": "s3:Put*",
+			"Resource": "arn:aws:s3:::BUCKET_NAME/*",
+			"Condition": {
+				"Null": {
+					"aws:MultiFactorAuthAge": true
+				}
+			}
+		}
+	]
+}
