@@ -28,7 +28,7 @@ By the end of this activity, you should have familiarity with the following:
 * Uncheck the "reset password" requirement
 * Leave everything else as default, ignore warnings (practice only!!)
 
-2. Create and apply a identity-based policy
+2. Create and apply an identity-based policy
 * Remaining in IAM, go to "policies"
 * Create a new policy, and switch to JSON view
 * Paste in the contents of the [S3 identity-based policy here](s3-open-policy.json)
@@ -68,7 +68,7 @@ By the end of this activity, you should have familiarity with the following:
 
 ***The upload to the bucket should fail!***
 
-Briefly review the contents of s3-bucket-policy.json to see why the upload failed
+Briefly review the contents of [S3 resource-based policy here](s3-bucket-policy.json) to see why the upload failed
 
 ### You're done!
 
@@ -92,6 +92,7 @@ Briefly review the contents of s3-bucket-policy.json to see why the upload faile
 * NOTE: Apply SCPs to OUs under root, not to root itself, as a best practice!
 
 
-Resources:
+## References:
 
 [Policies and permissions in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+[Controlling access to and for IAM users and roles using tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
