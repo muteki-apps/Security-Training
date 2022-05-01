@@ -6,7 +6,7 @@ NOTE: In the interests of time, we're using the `member-test-acct` for this acti
 
 ## Part A: Enable security services
 
-1. Enable Macie:
+1. Enable Macie
 * Log into the `member-test-acct` account's root user
 * Navigate to Macie -> "Get started"
 * Select the "Analyze buckets" option
@@ -15,12 +15,12 @@ NOTE: In the interests of time, we're using the `member-test-acct` for this acti
 * Leave the rest of the steps as is, give the job a name
 * Save and run, we'll come back to it later
 
-2. Enable Security Hub:
+2. Enable Security Hub
 * Navigate to Security Hub and click "Go to Security Hub"
 * Check off all the options under "security standards"
 * Save, we'll come back to it later
 
-3. Enable and set rules in AWS Config:
+3. Enable and set rules in AWS Config
 * Navigate to Config and enable it 
 * Leave all default options
 * Under AWS managed rules, search for and enable anything for "s3-"
@@ -56,17 +56,15 @@ NOTE: In the interests of time, we're using the `member-test-acct` for this acti
     * Name: `organization-trail`
     * Select the checkbox to "enable for all accounts in my organization"
     * Under storage location, make sure the option "Create new S3 bucket" is selected. You can leave the location as default.
-* Save the trail
+    * Deselect "Log file SSE-KMS encryption" -- in the interests of time, we'll skip this
+    * Hit next, and on the next page, make sure the only type logged is "Management Events"
+    * Review and create the trail
+    * Open the new S3 bucket in another tab
 
-8. Configure log export
-* In CloudTrail, go back into organization trail you just created
-* Scroll down to “export” section
-* Select option to create new S3 bucket to export logs
-* Open the S3 bucket in another tab -- we'll need this shortly
-* Deselect "Log file SSE-KMS encryption" -- in the interests of time, we'll skip this
-* Hit next, and on the next page, make sure the only type logged is "Management Events"
-* Review and create the trail
+8. View exported logs in S3
+* Wait ~5 minutes and data will start showing up
+* Drill down and take a look at the logs
+* ...and then remember that they're intended to go into a SIEM where they can be parsed and searched efficiently!
 
-9. Generate activity in S3
-* Log out and then back in to the member account (either user)
-* Wait ~5 minutes (womp womp)
+[Creating a trail for your organization in the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-in-the-console.html)
+
